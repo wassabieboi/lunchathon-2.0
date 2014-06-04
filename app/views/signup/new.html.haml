@@ -1,0 +1,45 @@
+%html{'ng-app' => 'SignupModule'}
+
+%div{'ng-controller' => 'ListAllController'}
+  .list-group{'ng-show' => 'mode == "all"'}
+    %a.list-group-item{'ng-repeat' => 'restaurant in restaurants', 'ng-click' => 'displayRestaurant(restaurant.id)'}
+      %h2.list-group-item-heading
+        {{ restaurant.name }}
+      %p.list-group-item-text
+        {{ restaurant.users.length }}
+
+  %div{'ng-show' => 'mode == "view"'}
+    .alert.alert-danger.fade.in#restaurant-created-alert{:style => 'display:none'}
+      %button.close{:type => 'button', 'data-dismiss' => 'alert', 'aria-hidden' => true} ×
+      %h5 That restaurant is already created!
+
+    .panel.panel-default#restaurant-panel
+
+      .panel-heading
+        %h3.panel-title#panel-restaurant-name
+          {{ restaurant.name }}
+      %table.table#restaurant-user-table
+        %tbody
+          %tr{'ng-repeat' => 'user in restaurant.users'}
+            %td
+              {{ user }}
+
+    .input-group
+      %label Enter your uniquely identifiable username:
+      %input.form-control#username-input{:type => "text"}
+      %span.input-group-btn#add-to-restaurant-span
+        %button.btn.btn-default#add-to-restaurant-button{:type => "button"} Sign me up!
+
+    .modal.fade#modal-register
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{:type => "button", "data-dismiss" => "modal", "aria-hidden"  => "true"} ×
+            %h4.modal-title Register as new user?
+          .modal-body
+            %p You are a new user, please register!
+            %p Please enter a display name:
+            %input#displayname-input
+          .modal-footer
+            %button.btn.btn-default{:type => "button", "data-dismiss" => "modal"} Close
+            %button.btn.btn-primary#modal-register-button{:type => "button"} Register
