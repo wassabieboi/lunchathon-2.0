@@ -2,7 +2,7 @@ class SignupController < ApplicationController
 
   respond_to :json
 
-  def new
+  def index
     
   end
 
@@ -18,6 +18,8 @@ class SignupController < ApplicationController
     respond_with test
   end
 
-  def create
+  def view_all
   end
+
+  
 end

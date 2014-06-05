@@ -4,31 +4,36 @@
 
 angular
   .module('SignupModule', [])
-  .controller('ListAllController', function ($scope, $http) {
-    $scope.mode = 'all';
+  .config(['$routeProvider',
+    function($routeProvider) {
+      $routeProvider
+        .when('/Restaurant/:restaurantId', {
+          templateUrl: 'view.html',
+          controller: 'ViewController',
+          controllerAs: 'view'
+        })
+        .otherwise({
+          templateUrl: 'view_all.html',
+          controller: 'ViewAllController',
+          controllerAs: 'viewall'
+        });
+    }])
+  .controller('ViewAllController', function ($scope, $http) {
 
-    $scope.listRestaurants = function() {
-      $scope.mode = 'all';
-      $http({
-        method: 'GET',
-        url: '/restaurants'
-      }).success(function (data) {
-        $scope.restaurants = data;
-      })
-    }
-
-    $scope.displayRestaurant = function(id) {
-      $scope.mode = 'view';
-      $http({
-        method: 'GET',
-        url: '/restaurant',
-        data: {id: id}
-      }).success(function (data) {
-        $scope.restaurant = data;
-      })
-    }
-
-    $scope.listRestaurants();
-
-
+    $http({
+      method: 'GET',
+      url: '/restaurants'
+    }).success(function (data) {
+      $scope.restaurants = data;
+    });
   })
+  .controller('ViewController', function ($scope, $http) {
+
+    $http({
+      method: 'GET',
+      url: '/restaurant',
+      data: {id: id}
+    }).success(function (data) {
+      $scope.restaurant = data;
+    });
+  });

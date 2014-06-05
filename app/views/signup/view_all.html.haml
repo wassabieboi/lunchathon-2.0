@@ -1,0 +1,6 @@
+.list-group
+  %a.list-group-item{'ng-repeat' => 'restaurant in restaurants', href: 'Restaurant/{{restaurant.id}}'}
+    %h2.list-group-item-heading
+      {{ restaurant.name }}
+    %p.list-group-item-text
+      {{ restaurant.users.length }}

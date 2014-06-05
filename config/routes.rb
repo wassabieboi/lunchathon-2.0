@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  get 'signup/new'
-
-  get 'signup/create'
+  get 'signup/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'signup#new'
+  root 'signup#index'
 
+  get 'viewAll' => 'signup#view_all'
+  get 'view' => 'signup#view'
   get 'restaurants' => 'signup#get_restaurant_and_attendees', :defaults => {:format => :json}
   get 'restaurant' => 'signup#get_restaurant', :defaults => {:format => :json}
 
