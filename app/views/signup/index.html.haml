@@ -1,5 +1,6 @@
 %html
   %body{'ng-app' => 'SignupModule'}
   %div{'ng-controller' => 'ViewAllController'}
+    = link_to('/view_all', '/Restaurants')
     = link_to('/view', '/Restaurant/1')
     %div{'ng-view' => true}

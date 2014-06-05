@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'signup#index'
 
-  get 'viewAll' => 'signup#view_all'
+  get 'view_all' => 'signup#view_all'
   get 'view' => 'signup#view'
   get 'restaurants' => 'signup#get_restaurant_and_attendees', :defaults => {:format => :json}
   get 'restaurant' => 'signup#get_restaurant', :defaults => {:format => :json}

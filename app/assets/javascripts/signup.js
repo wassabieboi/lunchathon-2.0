@@ -3,20 +3,20 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 
 angular
-  .module('SignupModule', [])
-  .config(['$routeProvider',
-    function($routeProvider) {
+  .module('SignupModule', ['ngRoute'])
+  .config(function($routeProvider) {
       $routeProvider
+        .when('/Restaurants', {
+          templateUrl: 'view_all.html',
+          controller: 'ViewAllController'
+        })
         .when('/Restaurant/:restaurantId', {
           templateUrl: 'view.html',
-          controller: 'ViewController',
-          controllerAs: 'view'
+          controller: 'ViewController'
         })
-        .otherwise({
-          templateUrl: 'view_all.html',
-          controller: 'ViewAllController',
-          controllerAs: 'viewall'
-        });
+		    .otherwise({
+    	    redirectTo: '/Restaurants'
+      });
     }])
   .controller('ViewAllController', function ($scope, $http) {
 
