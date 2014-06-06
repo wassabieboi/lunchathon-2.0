@@ -4,7 +4,7 @@
 
 angular
   .module('SignupModule', ['ngRoute'])
-  .config(function($routeProvider) {
+  .config(['$routeProvider', function($routeProvider) {
       $routeProvider
         .when('/Restaurants', {
           templateUrl: 'view_all.html',
