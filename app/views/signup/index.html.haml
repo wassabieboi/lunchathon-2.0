@@ -1,5 +1,9 @@
+%html
 %body{'ng-app' => 'SignupModule'}
-  %div{'ng-controller' => 'ViewAllController'}
-    = link_to('/view_all', '/Restaurants')
+  %div{'ng-controller' => 'MainController'}
+    = link_to('/view_all', '/')
     = link_to('/view', '/Restaurant/1')
+    = link_to('/other', '/blargh/1')
     %div{'ng-view' => true}
+      view
+    {{ test }}

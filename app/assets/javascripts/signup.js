@@ -4,22 +4,31 @@
 
 angular
   .module('SignupModule', ['ngRoute'])
-  .config(['$routeProvider', function($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
       $routeProvider
-        .when('/Restaurants', {
-          templateUrl: 'view_all.html',
+        .when('/', {
+          templateUrl: '/view_all.html',
           controller: 'ViewAllController'
         })
         .when('/Restaurant/:restaurantId', {
-          templateUrl: 'view.html',
+          templateUrl: '/view.html',
           controller: 'ViewController'
         })
-		    .otherwise({
-    	    redirectTo: '/Restaurants'
-      });
-    }])
-  .controller('ViewAllController', function ($scope, $http) {
+        .otherwise({ redirect: '/' });
 
+        $locationProvider.html5Mode(true);
+    })
+  .controller('MainController', function($scope, $route, $routeParams, $location) {
+    console.log("MainController");
+    $scope.$route = $route;
+    $scope.$location = $location;
+    $scope.$routeParams = $routeParams;
+    $scope.test = "foo";
+  })  
+  .controller('ViewAllController', function ($scope, $routeParams, $http) {
+    console.log("ViewAllController");
+     $scope.params = $routeParams;
+  
     $http({
       method: 'GET',
       url: '/restaurants'
@@ -27,8 +36,10 @@ angular
       $scope.restaurants = data;
     });
   })
-  .controller('ViewController', function ($scope, $http) {
-
+  .controller('ViewController', function ($scope, $routeParams, $http) {
+    console.log("ViewController");
+     $scope.params = $routeParams;
+  
     $http({
       method: 'GET',
       url: '/restaurant',
@@ -36,4 +47,5 @@ angular
     }).success(function (data) {
       $scope.restaurant = data;
     });
-  });
+  })
+	;
